@@ -39,21 +39,23 @@ def getMozData(l_domains):
         print(f"Error: {response.status_code}, {response.text}")
     return dct_arr
 
-text_input=st.text_area("Write the domains to obtain MOZ data",'')
+text_input=st.text_area("Write the URLs or domains to obtain Moz data. We must include one domain or URL per row.",'')
 
-csv=st.file_uploader('CSV with all domains', type='csv')
+csv=st.file_uploader('CSV with all the domains or URLs to obtain Moz data. We must include one domain or URL per row.', type='csv')
 
 l_domains=[]
 #if ther is no csv we check the text Area
 if csv is None:
     if len(text_input)>0:
         l_domains=text_input.split('\n')
+        st.write(l_domains)
 else:
     df_input=pd.read_csv(csv,header=None)
     st.write(df_input)
-    l_domains=csv[0].to_list()
-    if l_domains<=MAX_DOMAINS:
-        api_token=st.text_input("API Token")
+    l_domains=df_input[0].to_list()
+if len(l_domains)<=MAX_DOMAINS:
+    api_token=st.text_input("API Token")
+    if len(api_token)>0:
         # Define your request headers with the custom API token
         headers = {
         "x-moz-token": api_token
@@ -78,6 +80,7 @@ else:
                     moz_dict["spam_score"] = data.get("spam_score", None)
                     moz_dict["page_authority"]= data.get("page_authority", None)
                     moz_dict["domain_authority"] = data.get("domain_authority", None)
+                    moz_dict["last_crawled"]=data.get("last_crawled", None)
                     dct_arr.append(moz_dict)
                 df = pd.DataFrame(dct_arr)
                 st.dataframe(df)
@@ -89,4 +92,5 @@ else:
                 )
         else:
             st.error(f"Error: {response.status_code}, {response.text}")
-                
+else:
+    st.warning(f"We only can chac up to {MAX_DOMAINS} URLs or domains")           
