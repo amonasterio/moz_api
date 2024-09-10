@@ -106,10 +106,10 @@ def getMozData(l_domains):
     return dct_arr
 
 #Remove duplicate and empty elements
-def removeDuplicateAndEmptyElements(array):
-    empty_removed = [element for element in array if element and element.strip()]
-    remove_duplicates = list(dict.fromkeys(empty_removed))
-    return remove_duplicates
+#def removeDuplicateAndEmptyElements(array):
+#    empty_removed = [element for element in array if element and element.strip()]
+#    remove_duplicates = list(dict.fromkeys(empty_removed))
+#    return remove_duplicates
 
 
 api_token=st.text_input("API Token")
@@ -127,7 +127,7 @@ if len(api_token)>0:
     l_domains=[]
     if len(text_input)>0:
         l_domains=text_input.split('\n')
-        l_domains=removeDuplicateAndEmptyElements(l_domains)
+        #l_domains=removeDuplicateAndEmptyElements(l_domains)
         st.write(l_domains)
         if len(l_domains)<=MAX_DOMAINS:
             results=getMozData(l_domains)
