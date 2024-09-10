@@ -76,17 +76,15 @@ l_domains=domains[0].to_list()
 count_domains=len(l_domains)
 # Seleccionar bloques de MAX_DOMAINS elementos
 domains_blocks = [l_domains[i:i+MAX_DOMAINS] for i in range(0, len(l_domains), MAX_DOMAINS)]
-dict_array=[]
+f_output='output/moz_data.csv'
 for block in domains_blocks:
     results=getMozData(block)
-    dict_array.extend(results)
-df = pd.DataFrame(dict_array)
-f_output='output/moz_data.csv'
-#SI existe el fichero añadimos lod datos al final, si no, lo creamos
-if os.path.exists(f_output):
-    df.to_csv('output/moz_data.csv', mode='a', header=False, index=False)
-else:
-    df.to_csv('output/moz_data.csv', index=False)
+    df = pd.DataFrame(results)
+    #SI existe el fichero añadimos lod datos al final, si no, lo creamos
+    if os.path.exists(f_output):
+        df.to_csv('output/moz_data.csv', mode='a', header=False, index=False)
+    else:
+        df.to_csv('output/moz_data.csv', index=False)
 
 
 fin=getUsageData('2024/09/08')
