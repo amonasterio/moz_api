@@ -4,9 +4,9 @@ import requests
 import json
 
 st.set_page_config(
-   page_title="Get MOZ Data"
+   page_title="Get Moz Data"
 )
-st.title("Get MOZ Data")
+st.title("Get Moz Data")
 
 #"Maximum number of domains to get Data. Request is limited to 50, but I reduce it to avoid wasting credits"
 MAX_DOMAINS=10
