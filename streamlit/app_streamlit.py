@@ -9,8 +9,8 @@ st.set_page_config(
 )
 st.title("Get Moz Data")
 
-#"Maximum number of domains to get Data. Request is limited to 50, but I reduce it to avoid wasting credits"
-MAX_DOMAINS=2
+#Maximum number of domains to get Data. Request is limited to 50, but I reduce it to avoid wasting credits"
+MAX_DOMAINS=10
 
 CREDITS_MOZ=3000 #Update when the plan is modified
 
