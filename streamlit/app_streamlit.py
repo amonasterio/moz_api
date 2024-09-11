@@ -138,7 +138,7 @@ if len(api_token)>0:
         if len(l_domains)<=MAX_DOMAINS:
             results=getMozData(l_domains)
             df = pd.DataFrame(results)    
-            st.dataframe(df)
+            st.dataframe(df, hide_index=True)
             creds_usage=getUsageData()
             st.write(str(creds_usage)+" out of 3000 credits consumed.")
             st.write(str(CREDITS_MOZ-creds_usage)+" credits available.")
