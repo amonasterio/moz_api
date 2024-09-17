@@ -78,6 +78,7 @@ def getCreditsAvailable(credits_used):
        available=CREDITS_MOZ-creds_usage
     return available
 
+@st.cache_data
 def getMozData(l_domains):
     endpoint="https://lsapi.seomoz.com/v2/url_metrics"
     data = {
